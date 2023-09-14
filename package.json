@@ -1,0 +1,12 @@
+{
+  "name": "game",
+  "uuid": "80b9b689-f093-4aa2-a4a7-3d80061e8221",
+  "creator": {
+    "version": "3.8.0"
+  },
+  "dependencies": {
+    "socket.io-client": "4.7.2",
+    "typescript": "^5.2.2"
+ 
+  }
+}
