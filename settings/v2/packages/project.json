@@ -2,8 +2,14 @@
   "__version__": "1.0.5",
   "general": {
     "designResolution": {
-      "width": 960,
-      "height": 640
-    }
+      "width": 1280,
+      "height": 720,
+      "fitHeight": true
+    },
+    "highQuality": false
+  },
+  "custom_joint_texture_layouts": [],
+  "script": {
+    "importMap": "project://"
   }
 }

@@ -6,5 +6,9 @@
   "compilerOptions": {
     "strict": false,
     "allowSyntheticDefaultImports": true, 
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["assets/scripts/*"]
+    }
   }
 }

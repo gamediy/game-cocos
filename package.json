@@ -5,8 +5,8 @@
     "version": "3.8.0"
   },
   "dependencies": {
+    "fingerprintjs": "^0.5.3",
     "socket.io-client": "4.7.2",
     "typescript": "^5.2.2"
- 
   }
 }
