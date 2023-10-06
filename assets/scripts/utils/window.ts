@@ -1,11 +1,11 @@
 import { director } from "cc";
-import { uitls } from "./utils";
+import uitls  from "./utils";
 import {Node} from "cc"
 import { Vec3 } from "cc";
 import { tween } from "cc";
 import { UIOpacity } from "cc";
 
-export  class window{
+export default class window{
 
     public static show(node:Node){
         console.info("open")

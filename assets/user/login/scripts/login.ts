@@ -3,7 +3,7 @@ import { Color } from 'cc';
 import { Vec3 } from 'cc';
 import { Graphics } from 'cc';
 import { UITransform } from 'cc';
-import { window } from '../../../scripts/utils/window';
+import window  from '../../../scripts/utils/window';
 import { _decorator, Component, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
