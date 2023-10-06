@@ -22,3 +22,39 @@ node_modules/
 # WebStorm
 #//////////////////////////
 .idea/
+
+# Temp files
+temp/
+*.bak
+
+# Build and runtime data
+build/
+library/
+
+# Local settings file
+local/
+
+# Cache
+*.log
+settings/
+.vscode/
+*.DS_Store
+
+# Cocos temporary files and build artifacts
+**/Thumbs.db
+**/.meta
+**/*.csb
+**/*.lst
+**/*.atlas
+
+# Binary files
+*.db
+*.db-wal
+*.db-shm
+
+# Backup
+*.bak
+
+# Auto generated
+*.jsc
+*.cbb
