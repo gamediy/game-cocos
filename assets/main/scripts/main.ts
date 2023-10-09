@@ -8,9 +8,11 @@ const { ccclass, property } = _decorator;
 export class main extends Component {
     @property(Prefab) hall
     @property(Prefab) login
+    @property(Node) loading:Node
     start() {
         console.info("main")
         setTimeout(()=>{
+            this.loading.destroy()
             this.node.addChild(instantiate(this.hall))
         },1000)
      

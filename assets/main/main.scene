@@ -170,7 +170,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "main",
+    "_name": "loading",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -573,7 +573,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 538.9090909090909,
+    "_orthoHeight": 466.4406779661017,
     "_near": 0,
     "_far": 1000,
     "_color": {
@@ -736,6 +736,9 @@
     "login": {
       "__uuid__": "d317985c-6c8f-4ad3-b34d-f623480574cf",
       "__expectedType__": "cc.Prefab"
+    },
+    "loading": {
+      "__id__": 4
     },
     "_id": "82GDaUBU9OF6DfUAF90etS"
   },

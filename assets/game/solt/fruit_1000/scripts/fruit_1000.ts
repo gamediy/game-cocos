@@ -1,33 +1,52 @@
 import { instantiate } from 'cc';
 import { tween } from 'cc';
 import { easing } from 'cc';
+import { Sprite } from 'cc';
+import { SpriteFrame } from 'cc';
 import { UITransform } from 'cc';
 import { Vec3 } from 'cc';
 import { Tween } from 'cc';
 import { Prefab } from 'cc';
 import { _decorator, Component, Node } from 'cc';
+import window  from "../../../../scripts/utils/window"
+import Events from "../../../../scripts/eventbus"
+import { Label } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('fruit_1000')
 export class fruit_1000 extends Component {
     @property([Prefab]) object: Prefab[] = []
+    @property(Prefab) bet:Prefab
     game:Node
+    @property(SpriteFrame) fireSF:SpriteFrame
+    @property(Node) showBet:Node
 
     total:number=30
     distance: number=0
     openResult:number[]=[]
     winTween:Tween<Node>[]=[]
-    spinBtn: Node | null = null; 
-   
+    spinBtn: Node | null = null
+    betBtn:Node
     start() {
         this.game=this.node.getChildByName("game")
         this.spinBtn=this.node.getChildByPath("bottom/spin")
+        this.betBtn=this.node.getChildByPath("bottom/selectBetAmount")
+        this.betBtn.on(Node.EventType.TOUCH_END,()=>{
+            window.show(instantiate(this.bet))
+            
+        },this)
         this.spinBtn.on(Node.EventType.TOUCH_END,this.spin,this)
         let ui=this.game.children[0].getComponent(UITransform)
         console.info(ui.height)
         this.distance=-(this.total/(this.game.children.length)*580-480)
        
         this.init()
+    
+        Events.on("select_bet",(event)=>{
+            console.info(event)
+            let amount=this.node.getChildByPath("bottom/selectBetAmountShow/amount").getComponent(Label)
+            amount.string=event
+        })
     }
     createNode(parentNode: Node) {
         let randomInt = Math.floor(Math.random() * this.object.length);
@@ -38,6 +57,8 @@ export class fruit_1000 extends Component {
     }
 
     spin() {
+        let won=this.node.getChildByName("won")
+        won.active=false
         this.spinBtn.off(Node.EventType.TOUCH_END,this.spin,this)
    
         const columns = this.game.children
@@ -75,6 +96,7 @@ export class fruit_1000 extends Component {
         });
     }
     nextInit(){
+      
         this.spinBtn.on(Node.EventType.TOUCH_END,this.spin,this)
         if(this.openResult.length>0){
             const columns = this.game.children
@@ -102,10 +124,28 @@ export class fruit_1000 extends Component {
         let allSame = this.openResult.every(value => value === this.openResult[0]);
         console.info(allSame)
         if(allSame){
-       
+            
+            let won=this.node.getChildByName("won")
+            won.active=true
+
+
             let game=this.game.children
             game.forEach(item=>{
                 let winNode=item.children[item.children.length-2]
+                // 检查winNode是否已有Sprite组件
+let sprite = winNode.getComponent(Sprite);
+if (!sprite) {
+    console.info("add sprite1")
+    sprite = winNode.addComponent(Sprite);
+}
+
+if (this.fireSF) {
+    console.info("add sprite2")
+    sprite.spriteFrame = this.fireSF;
+} else {
+    console.error("fireSF is not loaded or assigned!");
+}
+                console.info(winNode)
                let win= tween(winNode)
                 .sequence(
                     tween().to(0.5, { scale: new Vec3(1.2, 1.2, 1.2) }),  // 缩放到 1.2 倍

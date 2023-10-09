@@ -13,6 +13,9 @@ export default class window{
       
        let mask=uitls.createMask()
        mask.addChild(node)
+       mask.on(Node.EventType.TOUCH_END,()=>{
+        mask.destroy()
+       },this)
        node.setScale(new Vec3(0, 0, 1))
        director.getScene().getChildByName("Canvas").insertChild(mask,3)
        tween(node)

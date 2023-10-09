@@ -6,6 +6,7 @@ import ws from "../../scripts/utils/ws"
 import uitls  from "../../scripts/utils/utils"
 import window  from "../../scripts/utils/window"
 import Http from '../../scripts/utils/http';
+import user from "../../scripts/user"
 import { director } from 'cc';
 import { UITransform } from 'cc';
 import { view } from 'cc';
@@ -69,7 +70,11 @@ export class hall extends Component {
         ws.getInstance().on(ws.wrapEventResponse(ws.event.Login),(res)=>{
             console.info(res)
             this.node.getChildByPath("header/left/account").getComponent(Label).string=res.data.userInfo.account
-            this.node.getChildByPath("header/left/amount/blance").getComponent(Label).string=res.data.wallet.balance
+            this.node.getChildByPath("header/left/amount/blance").getComponent(Label).string=res.data.wallet.balance||0
+            user.getInstance().watchBalance((res)=>{
+                this.node.getChildByPath("header/left/amount/blance").getComponent(Label).string=res.balance.toString()
+            })
+
         })
       
     }
@@ -89,6 +94,7 @@ export class hall extends Component {
             console.info(err)
         })
         console.info("open login")
+        this.node.getChildByPath("header/left/amount/blance").getComponent(Label).string=user.getInstance().balance.toString()
         window.show(instantiate(this.login))
     }
   
